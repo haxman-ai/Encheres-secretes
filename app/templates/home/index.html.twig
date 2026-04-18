@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Objets aux enchères</h1>
+
+    <div class="row">
+        {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text">
+                            <strong>Prix de départ :</strong> {{ item.startingPrice }} €
+                        </p>
+                        <p class="card-text">
+                            <strong>Statut :</strong> {{ item.status }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun objet disponible.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

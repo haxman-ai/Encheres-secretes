@@ -1,0 +1,12 @@
+# Symfony
+/app/var/
+/app/vendor/
+/app/.env.local
+
+# Node (si utilisé)
+/node_modules/
+/app/public/build/
+
+# OS
+.DS_Store
+Thumbs.db
