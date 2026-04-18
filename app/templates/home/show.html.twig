@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de l'objet{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">{{ item.title }}</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p><strong>Description :</strong> {{ item.description }}</p>
+            <p><strong>Prix de départ :</strong> {{ item.startingPrice }} €</p>
+            <p><strong>Statut :</strong> {{ item.status }}</p>
+
+            <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -19,6 +19,9 @@
                         <p class="card-text">
                             <strong>Statut :</strong> {{ item.status }}
                         </p>
+                        <a href="{{ path('app_item_show', {id: item.id}) }}" class="btn btn-primary">
+                            Voir le détail
+                        </a>
                     </div>
                 </div>
             </div>
