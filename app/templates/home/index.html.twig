@@ -17,7 +17,14 @@
                             <strong>Prix de départ :</strong> {{ item.startingPrice }} €
                         </p>
                         <p class="card-text">
-                            <strong>Statut :</strong> {{ item.status }}
+                            <strong>Statut :</strong> 
+                             {% if item.status =='published' %}
+                               publié 
+                             {% elseif item.status=='closed' %}  
+                               cloturé
+                             {% else %} 
+                               non publié
+                             {% endif %}                     
                         </p>
                         <a href="{{ path('app_item_show', {id: item.id}) }}" class="btn btn-primary">
                             Voir le détail

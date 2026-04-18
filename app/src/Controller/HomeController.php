@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,11 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(ItemRepository $itemRepository): Response
+    public function index(ItemRepository $itemRepository, CategoryRepository $categoryRepository ,): Response
     {
-        $items = $itemRepository->findBy([
-            'status' => ['published','closed']
-        ]);
+       $items = $itemRepository->findPublishedOrClosed();
 
         return $this->render('home/index.html.twig', [
             'items' => $items,
