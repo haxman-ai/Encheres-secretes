@@ -14,23 +14,27 @@ class Offer
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?float $amount = null;
+    private ?int $amount = null;
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'offers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Item $item = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAmount(): ?float
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    public function setAmount(float $amount): static
+    public function setAmount(int $amount): static
     {
         $this->amount = $amount;
 
@@ -45,6 +49,18 @@ class Offer
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getItem(): ?Item
+    {
+        return $this->item;
+    }
+
+    public function setItem(?Item $item): static
+    {
+        $this->item = $item;
 
         return $this;
     }

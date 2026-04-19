@@ -34,12 +34,19 @@ class Item
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'items')]
     private Collection $categories;
 
+    /**
+     * @var Collection<int, Offer>
+     */
+    #[ORM\OneToMany(targetEntity: Offer::class, mappedBy: 'item')]
+    private Collection $offers;
+
     #[ORM\ManyToOne]
     private ?User $winner = null;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,7 +62,6 @@ class Item
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -67,7 +73,6 @@ class Item
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -79,7 +84,6 @@ class Item
     public function setStartingPrice(int $startingPrice): static
     {
         $this->startingPrice = $startingPrice;
-
         return $this;
     }
 
@@ -91,7 +95,6 @@ class Item
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -122,6 +125,35 @@ class Item
         return $this;
     }
 
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): static
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers->add($offer);
+            $offer->setItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): static
+    {
+        if ($this->offers->removeElement($offer)) {
+            if ($offer->getItem() === $this) {
+                $offer->setItem(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getWinner(): ?User
     {
         return $this->winner;
@@ -130,7 +162,6 @@ class Item
     public function setWinner(?User $winner): static
     {
         $this->winner = $winner;
-
         return $this;
     }
 }
