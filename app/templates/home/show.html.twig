@@ -28,6 +28,12 @@
                     non publié
                 {% endif %}
             </p>
+            {% if item.status == 'closed' %}
+            <p>
+            <strong>Gagnant :</strong>
+            {{ item.winner ? item.winner.email : 'Aucun gagnant' }}
+           </p>
+           {% endif %}
 
             <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour</a>
 
