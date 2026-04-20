@@ -34,7 +34,9 @@
             {{ item.winner ? item.winner.email : 'Aucun gagnant' }}
            </p>
            {% endif %}
-
+            <a href="{{ path('app_item_offer', {id: item.id}) }}" class="btn btn-warning">
+            Enchérir
+            </a>
             <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour</a>
 
         </div>

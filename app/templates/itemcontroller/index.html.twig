@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Placer une enchère{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.amount) }}
+        <button type="submit" class="btn btn-primary">Enchérir</button>
+    {{ form_end(form) }}
+{% endblock %}

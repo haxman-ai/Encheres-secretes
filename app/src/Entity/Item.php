@@ -98,9 +98,6 @@ class Item
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
     public function getCategories(): Collection
     {
         return $this->categories;
@@ -125,9 +122,6 @@ class Item
         return $this;
     }
 
-    /**
-     * @return Collection<int, Offer>
-     */
     public function getOffers(): Collection
     {
         return $this->offers;

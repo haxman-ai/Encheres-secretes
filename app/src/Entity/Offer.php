@@ -37,7 +37,6 @@ class Offer
     public function setAmount(int $amount): static
     {
         $this->amount = $amount;
-
         return $this;
     }
 
@@ -49,7 +48,6 @@ class Offer
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -61,7 +59,6 @@ class Offer
     public function setItem(?Item $item): static
     {
         $this->item = $item;
-
         return $this;
     }
 }
