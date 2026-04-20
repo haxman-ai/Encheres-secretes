@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail Admin{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <h1>{{ item.title }}</h1>
+
+    <p><strong>Description :</strong> {{ item.description }}</p>
+    <p><strong>Prix de départ :</strong> {{ item.startingPrice }} €</p>
+
+    <p>
+        <strong>Statut :</strong>
+        {% if item.status == 'unpublished' %}
+            Non publié
+        {% elseif item.status == 'published' %}
+            Publié
+        {% elseif item.status == 'closed' %}
+            Fermé
+        {% else %}
+            Inconnu
+        {% endif %}
+    </p>
+
+    {% if item.status == 'closed' and item.winner %}
+        <p><strong>Gagnant :</strong> {{ item.winner.email }}</p>
+    {% endif %}
+    
+    <div class="mt-3">
+        <a href="{{ path('app_admin_toggle', {'id': item.id}) }}" class="btn btn-warning">
+
+            Changer le statut
+        </a>
+    </div>
+
+    <h2 class="mt-4">Offres</h2>
+
+    {% if item.offers|length > 0 %}
+        <ul>
+            {% for offer in item.offers %}
+                <li>{{ offer.user.email }} - {{ offer.amount }} €</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune offre pour cet objet.</p>
+    {% endif %}
+</div>
+<div class="mt-3 d-flex gap-2">
+    {% if item.status != 'closed' %}
+        <a href="{{ path('app_admin_toggle', {'id': item.id}) }}" class="btn btn-warning">
+            Changer le statut
+        </a>
+    {% endif %}
+
+    {% if item.status == 'published' and item.offers|length > 0 %}
+        <a href="{{ path('app_admin_close', {'id': item.id}) }}" class="btn btn-danger">
+            Fermer les enchères
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

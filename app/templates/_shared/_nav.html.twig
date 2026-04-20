@@ -1,6 +1,4 @@
 
-
-{% block body %}
 <div class="container mt-5">
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
@@ -11,32 +9,30 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="{{path('app_home')}}">Accueil
+          <a class="nav-link active" href="{{ path('app_home') }}">Accueil
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        {% if app.user %}
+              {% if app.user and is_granted('ROLE_ADMIN') %}
         <li class="nav-item">
-          <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
+          <a class="nav-link" href="{{ path('app_admin_list') }}">Admin</a>
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_register')}}">Enregistrement</a>
-        </li>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{path('app_admin_index')}}">Administration
+      {% endif %}
 
-          </a>
-        </li>
+        {% if app.user %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register') }}">Enregistrement</a>
+          </li>
         {% endif %}
       </ul>
     </div>
   </div>
 </nav>
 </div>
-{% endblock %}

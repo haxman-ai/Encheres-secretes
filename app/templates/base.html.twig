@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Accueil{% endblock %}</title>
-
     {% block stylesheets %}
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/lux/bootstrap.min.css" rel="stylesheet">
     {% endblock %}
 </head>
 <body>
 {% include '_shared/_nav.html.twig' %}
-    {% block body %}{% endblock %}
 
+<div class="container mt-3">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{% block body %}{% endblock %}
 </body>
-
 </html>
